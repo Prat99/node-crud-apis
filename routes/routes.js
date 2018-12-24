@@ -3,6 +3,9 @@
 // it is often referred to as a “mini-app”.
 // all the routes and middleware are specific to this module.
 
+// For project architeture prespective, we shoud put all our controllers to seperate file
+// and import it here to attach to specific routes.
+
 const express = require('express');
 const router = express.Router();
 const db = require('../db/db');
@@ -14,7 +17,7 @@ router.get('/', (req, res) => {
     let sql = `SELECT * FROM notes`;
     db.query(sql, (err, result, fields) => {
         if(err) {
-            res.send({ 'error': 'An error has occurred', err }); 
+            res.send({ 'error': 'An error has occurred', err });
         } else {
             console.log('res', result);
             console.log('fields', fields);
@@ -54,7 +57,6 @@ router.post('/notes', (req, res, next) => {
             res.status(200).send(response);
         }
     });
-    
 });
 
 router.put('/notes/:id', (req, res, next) => {
